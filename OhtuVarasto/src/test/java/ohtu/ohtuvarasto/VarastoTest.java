@@ -65,4 +65,72 @@ public class VarastoTest {
         // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
     }
+    
+    @Test
+    public void varastossaOnAlkusaldo(){
+        Varasto uusi = new Varasto(10, 5);
+        
+        // varaston saldoksi pitäisi tulla 5
+        assertEquals(5, uusi.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void tilavuusNollaJosAnnetaanNegatiivinenLukuKonstruktorissa(){
+        Varasto uusi = new Varasto(-1);
+        
+        // varaston tilavuudeksi pitäisi tulla 0
+        assertEquals(0, uusi.getTilavuus(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void yritetaanLaittaaLiikaa(){
+        varasto.lisaaVarastoon(1000);
+        
+        // varaston saldon pitäisi olla tilavuus
+        assertEquals(varasto.getTilavuus(), varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void yritetaanOttaaNegatiivinenMaara(){
+        
+        // pitäisi saada 0
+        assertEquals(0, varasto.otaVarastosta(-1), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void yritetaanOttaaLiikaa(){
+        varasto.lisaaVarastoon(5);
+        
+        // pitäisi saada 5
+        assertEquals(5, varasto.otaVarastosta(10), vertailuTarkkuus);
+    }
+    @Test
+    public void annetaanAlkuSaldoMuttaTilavuusNegatiivinen(){
+        Varasto uusi = new Varasto(-1, 5);
+        
+        // Tilavuuden pitäisi olla 0
+        assertEquals(0, uusi.getTilavuus(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void annetaanNegatiivinenAlkusaldo(){
+        Varasto uusi = new Varasto(10, -1);
+        
+        // Saldon pitäisi olla 0
+        assertEquals(0, uusi.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void lisaaNegatiivinenMaara(){
+        varasto.lisaaVarastoon(-1);
+        
+        // Saldon pitäisi olla 0
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void toStringOikein(){
+        // Tulostuksen pitäisi olla "saldo = 0, vielä tilaa 10".
+       assertEquals("saldo = 0.0, vielä tilaa 10.0", varasto.toString());
+    }
 }
