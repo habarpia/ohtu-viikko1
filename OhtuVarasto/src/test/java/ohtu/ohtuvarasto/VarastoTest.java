@@ -125,7 +125,7 @@ public class VarastoTest {
         varasto.lisaaVarastoon(-1);
         
         // Saldon pitäisi olla 0
-        assertEquals(1, varasto.getSaldo(), vertailuTarkkuus);
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
     }
     
     @Test
